@@ -38,7 +38,6 @@ public class TestUpdate {
         Planet p1 = new Planet(1.0, 1.0, 3.0, 4.0, 5.0, "jupiter.gif");
 
         p1.update(2.0, 1.0, -0.5);
-
         checkEquals(7.8, p1.xxPos, "update()", 0.01);
         checkEquals(8.6, p1.yyPos, "update()", 0.01);
         checkEquals(3.4, p1.xxVel, "update()", 0.01);
