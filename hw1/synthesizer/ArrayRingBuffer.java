@@ -1,26 +1,35 @@
 // TODO: Make sure to make this class a part of the synthesizer package
-// package <package name>;
+package synthesizer;
 import java.util.Iterator;
 
 //TODO: Make sure to make this class and all of its methods public
 //TODO: Make sure to make this class extend AbstractBoundedQueue<t>
-public class ArrayRingBuffer<T>  {
+public class ArrayRingBuffer<AnyObject> extends AbstractBoundedQueue<AnyObject> {
     /* Index for the next dequeue or peek. */
     private int first;            // index for the next dequeue or peek
     /* Index for the next enqueue. */
     private int last;
     /* Array for storing the buffer data. */
-    private T[] rb;
+    private AnyObject[] rb;
+
+    public static void main(String[] args) {
+      ArrayRingBuffer l1 = new ArrayRingBuffer(4);
+      l1.capacity();
+      l1.enqueue("ANYBODY");
+      l1.peek();
+    }
+
 
     /**
      * Create a new ArrayRingBuffer with the given capacity.
      */
     public ArrayRingBuffer(int capacity) {
-        // TODO: Create new array with capacity elements.
-        //       first, last, and fillCount should all be set to 0.
-        //       this.capacity should be set appropriately. Note that the local variable
-        //       here shadows the field we inherit from AbstractBoundedQueue, so
-        //       you'll need to use this.capacity to set the capacity.
+      rb = (AnyObject[]) new Object[capacity];
+      first = 0;
+      last = 0;
+      fillCount = 0;
+      this.capacity = capacity;
+
     }
 
     /**
@@ -28,8 +37,12 @@ public class ArrayRingBuffer<T>  {
      * throw new RuntimeException("Ring buffer overflow"). Exceptions
      * covered Monday.
      */
-    public void enqueue(T x) {
+    public void enqueue(AnyObject x) {
+      rb[last] = x;
+      fillCount += 1;
+      last += 1;
         // TODO: Enqueue the item. Don't forget to increase fillCount and update last.
+
     }
 
     /**
@@ -37,16 +50,18 @@ public class ArrayRingBuffer<T>  {
      * throw new RuntimeException("Ring buffer underflow"). Exceptions
      * covered Monday.
      */
-    public T dequeue() {
-        // TODO: Dequeue the first item. Don't forget to decrease fillCount and update 
-    }
+     public AnyObject dequeue() {
+       return rb[first];
+         // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
+     }
 
-    /**
-     * Return oldest item, but don't remove it.
-     */
-    public T peek() {
-        // TODO: Return the first item. None of your instance variables should change.
-    }
+     /**
+      * Return oldest item, but don't remove it.
+      */
+     public AnyObject peek() {
+       return rb[first];
+         // TODO: Return the first item. None of your instance variables should change.
+     }
 
-    // TODO: When you get to part 5, implement the needed code to support iteration.
+     // TODO: When you get to part 5, implement the needed code to support iteration.
 }
