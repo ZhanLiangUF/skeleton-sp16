@@ -38,11 +38,13 @@ public class ArrayRingBuffer<AnyObject> extends AbstractBoundedQueue<AnyObject> 
      * covered Monday.
      */
     public void enqueue(AnyObject x) {
+      if (last == capacity) {
+        throw new IllegalArgumentException("Can't enqueue array ring buffer of size" + capacity);
+      }
       rb[last] = x;
       fillCount += 1;
       last += 1;
         // TODO: Enqueue the item. Don't forget to increase fillCount and update last.
-
     }
 
     /**
@@ -51,7 +53,16 @@ public class ArrayRingBuffer<AnyObject> extends AbstractBoundedQueue<AnyObject> 
      * covered Monday.
      */
      public AnyObject dequeue() {
-       return rb[first];
+       if (first == capacity) {
+         first = 0;
+       } else if (fillCount == 0) {
+         throw new IllegalArgumentException("Can't dequeue array ring buffer of size" + fillCount);
+       }
+       AnyObject randomObject = rb[first];
+       rb[first] = null;
+       fillCount -= 1;
+       first += 1;
+       return randomObject;
          // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
      }
 
@@ -59,9 +70,9 @@ public class ArrayRingBuffer<AnyObject> extends AbstractBoundedQueue<AnyObject> 
       * Return oldest item, but don't remove it.
       */
      public AnyObject peek() {
+       System.out.print(rb[first]);
        return rb[first];
          // TODO: Return the first item. None of your instance variables should change.
      }
-
      // TODO: When you get to part 5, implement the needed code to support iteration.
 }

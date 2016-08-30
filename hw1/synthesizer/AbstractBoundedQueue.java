@@ -4,6 +4,7 @@ public abstract class AbstractBoundedQueue<AnyObject> implements BoundedQueue<An
   protected int fillCount;
   protected int capacity;
   public int capacity() {
+    System.out.print(capacity);
     return capacity;
   }
   public int fillCount() {
