@@ -4,10 +4,8 @@ public class WeightedQuickUnion {
   private int count; // number of components
 
   public static void main(String[] args) {
-    WeightedQuickUnion 1 = new WeightedQuickUnion(1);
-    WeightedQuickUnion 2 = new WeightedQuickUnion(2);
-    connect(1,2);
-    isConnected(1,2);
+    WeightedQuickUnion uf = new WeightedQuickUnion(3);
+    uf.isConnected(1,2);
   }
 
   public WeightedQuickUnion(int n) {
